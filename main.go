@@ -12,7 +12,7 @@ func stringRomanToInt(roman string) (int, error) {
 	romanMap := map[byte]int{'I': 1, 'V': 5, 'X': 10}
 
 	if len(roman) == 0 {
-		return 0, fmt.Errorf("Empty string")
+		return 0, fmt.Errorf("Пустая строка")
 	}
 
 	for _, char := range roman {
@@ -33,21 +33,21 @@ func stringRomanToInt(roman string) (int, error) {
 	return result, nil
 }
 
-func intToRoman(arabic int) string {
-	arabicMap := map[byte]string{100: "C", 90: "XC", 50: "L", 40: "XL", 10: "X", 9: "IX", 5: "V", 4: "IV", 1: "I"}
+func intToRoman(num int) string {
+	romanValues := []string{"C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+	intValues := []int{100, 90, 50, 40, 10, 9, 5, 4, 1}
 
-	roman := ""
-	for arabic > 0 {
-		for value, symbol := range arabicMap {
-			if byte(arabic) >= value {
-				roman += symbol
-				arabic -= int(value)
-				break
-			}
+	result := ""
+	i := 0
+	for num > 0 {
+		for intValues[i] <= num {
+			result += romanValues[i]
+			num -= intValues[i]
 		}
+		i++
 	}
 
-	return roman
+	return result
 }
 
 func calc(num1 int, operator string, num2 int) int {
